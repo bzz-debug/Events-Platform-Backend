@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-draft": "^1.0.4",
+    "firebase": "^12.4.0"
+  },
+  "scripts": {
+    "dev": "nodemon server.js"
+  }
+}
