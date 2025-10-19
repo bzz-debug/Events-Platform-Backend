@@ -6,7 +6,7 @@ const cors = require("cors");
 const paypal = require("./paypal.model");
 
 const app = express();
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "https://weston-walkies.netlify.app" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
@@ -31,11 +31,6 @@ app.use((err, req, res, next) => {
 
 app.get("/complete-order", async (req, res) => {
   const { token } = req.query;
-
-  // PayPal order ID
-  // 1. Capture the order using PayPal API
-  // 2. Write order/payment info to Firestore
-  // 3. Respond to user (e.g., show success page)
 });
 
 const PORT = process.env.PORT || 3000;

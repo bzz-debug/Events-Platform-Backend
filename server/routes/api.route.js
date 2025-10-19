@@ -23,7 +23,7 @@ const { payment } = require("../payment");
 const oauth2client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  "http://localhost:5173"
+  "https://weston-walkies.netlify.app"
 );
 
 router.get("/", async (req, res, next) => {
@@ -109,7 +109,7 @@ router.post("/pay", payment);
 router.get("/complete-order/:eventId/:userId", (req, res, next) => {
   const { eventId, userId } = req.params;
   addAttendee(eventId, userId).then(() => {
-    res.redirect("http://localhost:5173/complete-order");
+    res.redirect("https://weston-walkies.netlify.app/complete-order");
   });
 });
 

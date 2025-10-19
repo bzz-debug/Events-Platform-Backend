@@ -56,10 +56,10 @@ exports.createOrder = (totalPrice, eventId, userId) => {
           ],
           application_context: {
             return_url:
-              "http://localhost:3000" +
+              "https://weston-walkies.netlify.app" +
               "/api/complete-order" +
               `/${eventId}/${userId}`,
-            cancel_url: "http://localhost:3000" + "/cancel-order",
+            cancel_url: "https://weston-walkies.netlify.app" + "/cancel-order",
             user_action: "PAY_NOW",
             brand_name: "Weston Walkies",
             shipping_preference: "NO_SHIPPING",
