@@ -20,9 +20,6 @@ const { postGoogleUser, fetchRefreshToken, addAttendee } = require("../model");
 
 const { payment } = require("../payment");
 
-console.log("GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
-console.log("GOOGLE_CLIENT_SECRET:", process.env.GOOGLE_CLIENT_SECRET);
-
 const oauth2client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
@@ -34,13 +31,9 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/create-tokens", async (req, res, next) => {
-  console.log("POST request received");
-  console.log("Request body:", req.body);
-  console.log("Content-Type:", req.headers["content-type"]);
   try {
     const { code } = req.body;
     const response = await oauth2client.getToken(code);
-    console.log("RESPONSE:", response.tokens);
     const { access_token, refresh_token } = response.tokens;
     const userInfoResponse = await fetch(
       "https://www.googleapis.com/oauth2/v2/userinfo",
