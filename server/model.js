@@ -1,3 +1,4 @@
+const admin = require("firebase-admin");
 const { db } = require("./firebase");
 
 exports.postGoogleUser = async function (email, googleId, refreshToken) {
@@ -29,11 +30,15 @@ exports.fetchRefreshToken = async (userId) => {
   return data.refreshToken;
 };
 
-exports.addAttendee = async (eventId, newAttendeeEmail) => {
-  const eventRef = doc(db, "events", eventId);
-  await updateDoc(eventRef, {
-    attendees: arrayUnion(newAttendeeEmail),
+exports.addAttendee = async (eventId, userId) => {
+  const eventRef = db.collection("events").doc(eventId);
+
+  await eventRef.update({
+    attendees: admin.firestore.FieldValue.arrayUnion(userId),
   });
-  const updatedDoc = (await getDoc(eventRef)).data();
-  return updatedDoc.attendees;
+
+  const updatedDoc = await eventRef.get();
+  const data = updatedDoc.data();
+  console.log(data.attendees);
+  return data.attendees;
 };

@@ -16,7 +16,7 @@ const {
   onSnapshot,
 } = require("firebase/firestore");
 
-const { postGoogleUser, fetchRefreshToken } = require("../model");
+const { postGoogleUser, fetchRefreshToken, addAttendee } = require("../model");
 
 const { payment } = require("../payment");
 
@@ -84,6 +84,7 @@ router.post("/create-event", async (req, res, next) => {
   const endDateTime = new Date(endDateTimeObject.seconds * 1000).toISOString();
 
   const refresh_token = await fetchRefreshToken(userId);
+
   try {
     oauth2client.setCredentials({ refresh_token });
     const calendar = google.calendar("v3");
@@ -112,6 +113,11 @@ router.post("/create-event", async (req, res, next) => {
 
 router.post("/pay", payment);
 
-router.get("/complete-order", (req, res, next) => {});
+router.get("/complete-order/:eventId/:userId", (req, res, next) => {
+  const { eventId, userId } = req.params;
+  addAttendee(eventId, userId).then(() => {
+    res.redirect("http://localhost:5173/complete-order");
+  });
+});
 
 module.exports = router;

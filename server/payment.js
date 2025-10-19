@@ -1,8 +1,8 @@
 const { createOrder } = require("./paypal.model");
 
 exports.payment = (req, res) => {
-  const { totalPrice } = req.body;
-  return createOrder(totalPrice)
+  const { totalPrice, eventId, userId } = req.body;
+  return createOrder(totalPrice, eventId, userId)
     .then((url) => {
       console.log("🔗 Redirecting to PayPal:", url);
       res.redirect(url);

@@ -17,7 +17,7 @@ function generateAccessToken() {
   //make sure to error handle here
 }
 
-exports.createOrder = (totalPrice) => {
+exports.createOrder = (totalPrice, eventId, userId) => {
   return generateAccessToken()
     .then((accessToken) => {
       return axios({
@@ -55,7 +55,10 @@ exports.createOrder = (totalPrice) => {
             },
           ],
           application_context: {
-            return_url: process.env.BASE_URL + "/complete-order",
+            return_url:
+              "http://localhost:3000" +
+              "/api/complete-order" +
+              `/${eventId}/${userId}`,
             cancel_url: "http://localhost:3000" + "/cancel-order",
             user_action: "PAY_NOW",
             brand_name: "Weston Walkies",
