@@ -57,7 +57,7 @@ exports.createOrder = (totalPrice, eventId, userId) => {
           application_context: {
             return_url:
               "https://weston-walkies.netlify.app" +
-              "/api/complete-order" +
+              "/complete-order" +
               `/${eventId}/${userId}`,
             cancel_url: "https://weston-walkies.netlify.app" + "/cancel-order",
             user_action: "PAY_NOW",
