@@ -56,7 +56,7 @@ exports.createOrder = (totalPrice, eventId, userId) => {
           ],
           application_context: {
             return_url:
-              "https://weston-walkies.netlify.app" +
+              "https://events-platform-backend-wfoi.onrender.com" +
               "/complete-order" +
               `/${eventId}/${userId}`,
             cancel_url: "https://weston-walkies.netlify.app" + "/cancel-order",
